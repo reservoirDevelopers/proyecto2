@@ -12,9 +12,10 @@ class APIHandler {
     return axios.get(URL);
   }
 
-  // getOneRegister (id) {
-  //   return axios.get(`${this.BASE_URL}/${id}`)
-  // }
+  getPopular () {
+    return axios.get(`${this.BASE_URL}/${id}`)
+    https://api.themoviedb.org/3/movie/popular?api_key=635c64864baeba5e93b372e67e9905a3&language=en-US&page=1
+  }
 
   // createOneRegister (character) {
   //   console.log(character)
