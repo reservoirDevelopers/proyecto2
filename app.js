@@ -14,15 +14,8 @@ const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
     
 
-mongoose
-  .connect('mongodb://localhost/proyecto2', {useNewUrlParser: true})
-  .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-  })
-  .catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
 
+require('./configs/db.config');
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
@@ -77,9 +70,6 @@ require('./passport')(app);
 
 const index = require('./routes/index');
 app.use('/', index);
-
-const authRoutes = require('./routes/auth');
-app.use('/auth', authRoutes);
       
 
 module.exports = app;
