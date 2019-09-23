@@ -13,8 +13,7 @@ class APIHandler {
   }
 
   getPopular () {
-    return axios.get(`${this.BASE_URL}/${id}`)
-    https://api.themoviedb.org/3/movie/popular?api_key=635c64864baeba5e93b372e67e9905a3&language=en-US&page=1
+    return axios.get(`${this.BASE_URL}popular?api_key=${process.env.MOVIE_KEY}`)
   }
 
   // createOneRegister (character) {

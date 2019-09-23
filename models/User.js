@@ -7,7 +7,10 @@ const userSchema = new Schema({
   password: String,
   city: String,
   country: String,
-  gender: { type: String, enum: [ 'female' , 'male', 'non-binary', 'prefer not to say' ]},
+  gender: { type: String,
+    enum: [ 'female' , 'male', 'non-binary', 'prefer not to say' ],
+    default: 'prefer not to say'
+  },
   status: {
     type: String,
     enum: ["Pending confirmation", "Active"],

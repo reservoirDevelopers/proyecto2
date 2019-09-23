@@ -1,17 +1,28 @@
 <h2>Signup</h2>
 
 <form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
-  <label for="email" required>Email</label>
-  <input id="email" type="email" name="email" placeholder="jonsnow@mail.com">
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email" placeholder="jonsnow@mail.com" required>
 
   <br><br>
-  <label for="username" required>Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" placeholder="JonSnow" required>
 
   <br><br>
 
-  <label for="password" required>Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" placeholder="Your password" required>
+
+  <br><br>
+ 
+  <label for="select">Gender</label>
+  <select name="gender"> 
+    <option value="">select</option>
+    <option value="female">female</option>
+    <option value="male">male</option>
+    <option value="non-binary">non-binary</option>
+    <option value="prefer not to say">prefer not to say</option>
+  </select>
 
   <br><br>
 
@@ -20,20 +31,14 @@
   
   <br><br>
 
-  <label for="photo">Profile picture</label>
-  <input type="file" name="photo" placeholder="your photo">
+  <label for="country">Country</label>
+  <input id="country" type="text" name="country" placeholder="Seven Kingdoms">
   
   <br><br>
 
-  <select required> 
-    <option value="select" disabled>select</option>
-    <option value="female">female</option>
-    <option value="male">male</option>
-    <option value="non-binary">non-binary</option>
-    <option value="prefer not to say">prefer not to say</option>
-  </select>
+  <label for="photo">Profile picture</label>
+  <input type="file" name="photo" placeholder="your photo">
   
-
 
   <br>
 
