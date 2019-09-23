@@ -1,14 +1,43 @@
 <h2>Signup</h2>
 
-<form action="/auth/signup" method="POST" id="form-container">
-  <label for="username">Username</label>
+<form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
+  <label for="email" required>Email</label>
+  <input id="email" type="email" name="email" placeholder="jonsnow@mail.com">
+
+  <br><br>
+  <label for="username" required>Username</label>
   <input id="username" type="text" name="username" placeholder="JonSnow">
 
   <br><br>
 
-  <label for="password">Password</label>
+  <label for="password" required>Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
+
+  <br><br>
+
+  <label for="city">City</label>
+  <input id="city" type="text" name="city" placeholder="Winterfell">
+  
+  <br><br>
+
+  <label for="photo">Profile picture</label>
+  <input type="file" name="photo" placeholder="your photo">
+  
+  <br><br>
+
+  <select required> 
+    <option value="select" disabled>select</option>
+    <option value="female">female</option>
+    <option value="male">male</option>
+    <option value="non-binary">non-binary</option>
+    <option value="prefer not to say">prefer not to say</option>
+  </select>
+  
+
+
   <br>
+
+
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}

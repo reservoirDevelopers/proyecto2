@@ -20,8 +20,6 @@ const userSchema = new Schema({
   },
   image: String,
   friends: { type: Array },
-
-
 }, {
   timestamps: {
     createdAt: 'created_at',
