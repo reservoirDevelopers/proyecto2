@@ -10,7 +10,7 @@ const User = require("../models/User");
 const bcryptSalt = 10;
 
 mongoose
-  .connect('mongodb://localhost/proyecto2', {useNewUrlParser: true})
+  .connect('mongodb://localhost/filmRecommendations', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -20,12 +20,28 @@ mongoose
 
 let users = [
   {
+    email: "alice@email.com",
     username: "alice",
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
+    city: "Madrid",
+    country: "Spain",
+    gender: 'female',
+    status: "Active",
+    confirmationCode: 1234,
+    image: 'uploads/profile/alice.jpg',
+    friends: [],
   },
   {
+    email: "bob@email.com",
     username: "bob",
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
+    city: "Barcelona",
+    country: "Spain",
+    gender: 'female',
+    status: "Active",
+    confirmationCode: 1234,
+    image: 'uploads/profile/bob.jpg',
+    friends: [],
   }
 ]
 
