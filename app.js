@@ -13,7 +13,7 @@ const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
     
-
+require('dotenv').config();
 
 require('./configs/db.config');
 const app_name = require('./package.json').name;
@@ -70,6 +70,9 @@ require('./passport')(app);
 
 const index = require('./routes/index');
 app.use('/', index);
+
+const movies = require('./routes/movies');
+app.use('/', movies);
       
 
 module.exports = app;

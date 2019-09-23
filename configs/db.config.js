@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 mongoose
   .connect('mongodb://localhost/filmRecommendations', {useNewUrlParser: true})
   .then(x => {
