@@ -82,4 +82,20 @@ nav a {
   overflow: hidden;
   white-space: nowrap; }
 
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.select-wrapper {
+  width: 20vw;
+  background-color: #b6b5b3;
+  margin: 0 auto;
+  padding: 0 10px; }
+
+.flex .s12 {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 /*# sourceMappingURL=style.css.map */

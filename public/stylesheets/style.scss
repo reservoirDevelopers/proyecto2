@@ -84,5 +84,24 @@ nav a {
     white-space: nowrap;
   }
 
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-wrapper {
+  width: 20vw;
+  background-color: rgb(182, 181, 179);
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.flex .s12 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
   
