@@ -6,16 +6,24 @@ class APIHandler {
     this.BASE_URL = baseUrl;
   }
 
-  getMovieDetails (id) {
+  getById(id) {
     const URL = `${this.BASE_URL}`+id+`?api_key=${process.env.MOVIE_KEY}`
     console.log(URL)
     return axios.get(URL);
   }
 
-  getPopular () {
-    return axios.get(`${this.BASE_URL}/${id}`)
-    https://api.themoviedb.org/3/movie/popular?api_key=635c64864baeba5e93b372e67e9905a3&language=en-US&page=1
+  getPopular() {
+    const URL = `${this.BASE_URL}popular?api_key=${process.env.MOVIE_KEY}`
+    console.log(URL)
+    return axios.get(URL)  
   }
+
+  // getById(id) {
+  //   const URL = `${this.BASE_URL}popular?api_key=${process.env.MOVIE_KEY}`
+  //   https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+  //   console.log(URL)
+  //   return axios.get(URL)
+  // }
 
   // createOneRegister (character) {
   //   console.log(character)

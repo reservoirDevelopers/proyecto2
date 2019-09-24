@@ -5,14 +5,13 @@ const movieSchema = new Schema({
   title: String,
   duration: Number,
   year: Number,
-  // category: {type: ObjectId, ref: 'Category'},
   genre: [String],
 	director: String,
   cast: [String],
 	country: [String],
 	sinopsis: String,
 	poster: String,
-	rate: Number,
+	review: { type: mongoose.Schema.Types.ObjectId, ref: 'Review' },
 }, {
   timestamps: {
     createdAt: 'created_at',

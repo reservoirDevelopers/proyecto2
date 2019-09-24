@@ -1,0 +1,24 @@
+<h3>Trending Movies</h3>
+<div class="carousel movieCard">
+{{#each movie}}
+    <a class="carousel-item" href="/info/{{id}}"><img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{this.poster_path}}"></a>
+{{/each}}
+</div>
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems, null);
+  });
+
+    var instance = M.Carousel.init({
+    fullWidth: true
+  });
+  </script>
