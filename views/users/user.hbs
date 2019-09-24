@@ -1,4 +1,8 @@
-{{!-- Profile picture <img src="" alt=""/> --}}
-<h2>{{this.username}}</h2>  
-{{!-- Connect with this user --}}
+{{#if image}}
+<img src="{{image}}" alt="{{username}} image"/>
+{{else}}
+<img src="https://media.giphy.com/media/3o7rc0qU6m5hneMsuc/giphy.gif" alt="{{user.username}} image"/>
+{{/if}}
+<h2>{{username}}</h2>
+<button>Connect with this user</button>
 {{!-- Statistics from user --}}
