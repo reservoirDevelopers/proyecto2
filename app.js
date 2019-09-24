@@ -71,8 +71,15 @@ require('./passport')(app);
 const index = require('./routes/index');
 app.use('/', index);
 
+const auth = require('./routes/users');
+app.use('/', auth);
+
 const movies = require('./routes/movies');
 app.use('/', movies);
+
+const users = require('./routes/users');
+app.use('/', users);
+      
       
 
 module.exports = app;

@@ -1,0 +1,9 @@
+{{#if user.image}}
+<img src="{{user.image}}" alt="{{user.username}} image"/>
+{{else}}
+<img src="https://media.giphy.com/media/3o7rc0qU6m5hneMsuc/giphy.gif" alt="{{user.username}} image"/>
+{{/if}}
+<h2>{{user.username}}</h2>
+<a href="/user/update">Update your data</a>
+{{!-- Statistics from user --}}
+<a href="/user/delete">Delete your account</a>
