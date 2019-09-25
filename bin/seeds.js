@@ -6,6 +6,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Movie = require("../models/Movie");
+const Review = require("../models/Review");
 
 const bcryptSalt = 10;
 
@@ -19,67 +21,11 @@ mongoose
   });
 
 let users = [
-  {
-    email: "alice@email.com",
-    username: "alice",
-    password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
-    city: "Madrid",
-    country: "Spain",
-    gender: 'female',
-    status: "Active",
-    confirmationCode: 1234,
-    image: 'uploads/alice.jpg',
-    friends: [],
-  },
-  {
-    email: "bob@email.com",
-    username: "bob",
-    password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
-    city: "Barcelona",
-    country: "Spain",
-    gender: 'female',
-    status: "Active",
-    confirmationCode: 5678,
-    image: 'uploads/bob.jpg',
-    friends: [],
-  },
-  ,
-  {
-    email: "natalia@gmail.com",
-    username: "natalia",
-    password: bcrypt.hashSync("natalia", bcrypt.genSaltSync(bcryptSalt)),
-    city: "La Coruña",
-    country: "Spain",
-    gender: 'prefer not to say',
-    status: "Active",
-    confirmationCode: 8901,
-    image: 'uploads/natalia.jpg',
-    friends: [],
-  }  ,
-  {
-    email: "brais@gmail.com",
-    username: "brais",
-    password: bcrypt.hashSync("brais", bcrypt.genSaltSync(bcryptSalt)),
-    city: "Vigo",
-    country: "Spain",
-    gender: 'prefer not to say',
-    status: "Active",
-    confirmationCode: 8902,
-    image: 'uploads/brais.jpg',
-    friends: [],
-  },
-  {
-    email: "marta@gmail.com",
-    username: "marta",
-    password: bcrypt.hashSync("marta", bcrypt.genSaltSync(bcryptSalt)),
-    city: "Madrid",
-    country: "Spain",
-    gender: 'prefer not to say',
-    status: "Active",
-    confirmationCode: 8903,
-    image: 'uploads/marta.jpg',
-    friends: [],
-  }
+  {"_id":"5d8a0159355bce661226fea4","gender":"female","status":"Active","friends":[],"email":"alice@email.com","username":"alice","password":"$2b$10$pyNv6kfA2sTnhF.sCelxr.K9B5qymbl1VsetVqThOMPTAMPcUlfGu","city":"Madrid","country":"Spain","confirmationCode":"1234","image":"uploads/alice.jpg","created_at":"2019-09-24T11:43:21.786Z","updated_at":"2019-09-24T11:43:21.786Z","__v":0},
+  {"_id":"5d8a0159355bce661226fea5","gender":"female","status":"Active","friends":[],"email":"bob@email.com","username":"bob","password":"$2b$10$R2JakNdZjULX81BZePEq/O25DJMinarRvsB.V4VYS6SWpi7Lu6JU6","city":"Barcelona","country":"Spain","confirmationCode":"5678","image":"uploads/bob.jpg","created_at":"2019-09-24T11:43:21.788Z","updated_at":"2019-09-24T11:43:21.788Z","__v":0},
+  {"_id":"5d8a0159355bce661226fea6","gender":"prefer not to say","status":"Active","friends":[],"email":"natalia@gmail.com","username":"natalia","password":"$2b$10$hVZZIvU/Bhs1MhQ1Km2FEubjZPyoVMxaVle25cILkVES3XrrRg6jO","city":"La Coruña","country":"Spain","confirmationCode":"8901","image":"uploads/natalia.jpg","created_at":"2019-09-24T11:43:21.788Z","updated_at":"2019-09-24T11:43:21.788Z","__v":0},
+  {"_id":"5d8a0159355bce661226fea7","gender":"prefer not to say","status":"Active","friends":[],"email":"brais@gmail.com","username":"brais","password":"$2b$10$2mSeunsytYkURBIoAA8YNOHSy.eRLqxXMT6dhat5MYoPFL4TBrajS","city":"Vigo","country":"Spain","confirmationCode":"8902","image":"uploads/brais.jpg","created_at":"2019-09-24T11:43:21.788Z","updated_at":"2019-09-24T11:43:21.788Z","__v":0},
+  {"_id":"5d8a0159355bce661226fea8","gender":"prefer not to say","status":"Active","friends":[],"email":"marta@gmail.com","username":"marta","password":"$2b$10$04H.p.PaqE1iG9thnYYxMOo/2oskVmFROCyBROzMrZFQGnayWodRK","city":"Madrid","country":"Spain","confirmationCode":"8903","image":"uploads/marta.jpg","created_at":"2019-09-24T11:43:21.788Z","updated_at":"2019-09-24T11:43:21.788Z","__v":0}
 ]
 
 let movies = [
@@ -113,13 +59,13 @@ let reviews = [
   {"_id":"5d8a03f1320b57668696847b","user":"5d8a0159355bce661226fea6","movie":"5d8a030e320b57668696846c","score":4,"created_at":"2019-09-24T11:54:25.253Z","updated_at":"2019-09-24T11:54:25.253Z","__v":0}
 ]
 
-User.deleteMany()
+Movie.deleteMany()
 .then(() => {
-  return User.create(users)
+  return Movie.create(movies)
 })
-.then(usersCreated => {
-  console.log(`${usersCreated.length} users created with the following id:`);
-  console.log(usersCreated.map(u => u._id));
+.then(moviesCreated => {
+  console.log(`${moviesCreated.length} movies created with the following id:`);
+  console.log(moviesCreated.map(u => u._id));
 })
 .then(() => {
   // Close properly the connection to Mongoose
@@ -130,13 +76,13 @@ User.deleteMany()
   throw err
 })
 
-User.deleteMany()
+Review.deleteMany()
 .then(() => {
-  return User.create(users)
+  return Review.create(reviews)
 })
-.then(usersCreated => {
-  console.log(`${usersCreated.length} users created with the following id:`);
-  console.log(usersCreated.map(u => u._id));
+.then(reviewsCreated => {
+  console.log(`${reviewsCreated.length} reviews created with the following id:`);
+  console.log(reviewsCreated.map(u => u._id));
 })
 .then(() => {
   // Close properly the connection to Mongoose

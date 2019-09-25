@@ -1,3 +1,8 @@
+{{#each similarityScores}}
+  {{this.similarity}}
+  {{this.id}}
+{{/each}}
+
 {{#if user.image}}
 <img src="{{user.image}}" alt="{{user.username}} image"/>
 {{else}}
@@ -5,5 +10,15 @@
 {{/if}}
 <h2>{{user.username}}</h2>
 <a href="/user/update">Update your data</a>
-{{!-- Statistics from user --}}
 <a href="/user/delete">Delete your account</a>
+
+{{!-- Statistics from user --}}
+
+<h3>Similar users</h3>
+<ul>
+{{#each reviewsOfAllUsers}}
+<li><a href="/user/{{this._id}}">{{this.username}}</a></li>
+{{/each}}
+</ul>
+
+<h3>Connections</h3>
