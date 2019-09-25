@@ -1,5 +1,8 @@
 const controller = {}
 const Review = require("../models/Review");
+require('../configs/db.config');
+
+controller.findNearestNeighbours();
 // Predicts user ratings based on similarity scores
 controller.inferRatings = (req, res, next) => {
   //TODO add scores brought from API so algorithm is more intelligent
@@ -40,8 +43,9 @@ controller.findNearestNeighbours = (req, res, next, user) => {
           // console.log(other)
           if (other != current) {
   
-            
-            let similarity = euclideanDistance(current, other);
+            console.log(current)
+            console.log(other)
+            // let similarity = euclideanDistance(current, other);
             console.log(current + " /// " + other)
             similarityScores[current] = similarity;
           } else {
@@ -103,7 +107,7 @@ function euclideanDistance(userId1, userId2) {
     similarity = 1 / (1 + d);
     // return similarity;
     // console.log(similarity);
-    similarityReport(similarity)
+    // similarityReport(similarity)
   });
 }
 
