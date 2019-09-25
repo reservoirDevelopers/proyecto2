@@ -16,11 +16,12 @@
 
 
 <div="flex">
-  <h3>Select</h3>
+  <h4>Rating: {{vote_average}}</h4>
+  <h4>Your vote:</h4>
   <div class="input-field col s12">
     <form action="/info/{{id}}" method="POST" name="ratingForm">
     <select name="rating" onchange="ratingForm.submit()">
-      <option value="">select</option>
+      <option value="">Not seen</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -34,4 +35,7 @@
     </form>
   </div>
 </div="flex">
+
+
+
 

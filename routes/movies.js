@@ -3,17 +3,27 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const Movie = require("../models/Movie");
-const APIHandler = require("../service/APIhandler.js")
+const APIHandler = require("../service/APIhandler.js");
 const moviesDB = new APIHandler('https://api.themoviedb.org/3/movie/');
 const User = require("../models/User");
 const Review = require("../models/Review");
 const secure = require("../middlewares/secure.mid");
 
-router.get('/popular', (req, res, next) => {
+router.get('/search', (req, res, next) => {
   moviesDB.getPopular()
     .then((response) => {
       const movie = response.data.results
-      res.render('movies/popular', { movie })
+      res.render('movies/search', { movie })
+    })
+})
+
+router.post('/result', (req, res, next) => {
+  const query = req.body.search;
+  moviesDB.getBySearch(query)
+    .then((response) => {
+      console.log(response.data.results)
+      const movie = response.data.results
+      res.render('movies/result', { movie })
     })
 })
 
@@ -29,6 +39,7 @@ router.get('/info/:id', (req, res, next) => {
   moviesDB.getById(id)
     .then((response) => {
       const movie = response.data
+      console.log(movie)
       res.render('movies/info', movie)
     })
     .catch(err => next(err))
@@ -48,7 +59,7 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
           user: userId,
           movie: movie._id,
           score: rating
-        }).then(res.redirect('/popular'))
+        }).then(res.redirect('/'))
       } else {
         moviesDB.getById(movieId).
         then((response) => {
@@ -67,7 +78,7 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
               movie: movie._id,
               score: rating
             })
-          }).then(res.redirect('/popular'))
+          }).then(res.redirect('/'))
         }).catch((err) => next(err));
       }
     });

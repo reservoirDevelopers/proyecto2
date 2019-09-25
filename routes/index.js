@@ -3,11 +3,21 @@ const router  = express.Router();
 const authRoutes = require('./auth');
 const moviesRoutes = require('./movies');
 const usersRoutes = require('./users');
+const APIHandler = require("../service/APIhandler.js");
+const moviesDB = new APIHandler('https://api.themoviedb.org/3/movie/');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('index');
-});
+  moviesDB.getPopular()
+    .then((response) => {
+      const movie = response.data.results
+      moviesDB.getTopRated()
+        .then((response) => {
+          const topRated = response.data.results
+          res.render('index', { movie, topRated })
+        })
+    })
+})
 
 router.use('/auth', authRoutes);
 router.use('/movies', moviesRoutes);

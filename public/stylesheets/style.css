@@ -8,7 +8,7 @@ body {
   color: #bebebe;
   font-size: 18px;
   font-family: Helvetica, Arial, sans-serif;
-  padding-top: 70px; }
+  padding-top: 40px; }
 
 h1, h3 {
   text-align: center;
@@ -87,8 +87,14 @@ nav a {
   justify-content: center;
   align-items: center; }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; }
+
 .select-wrapper {
-  width: 20vw;
+  width: fit-content;
   background-color: #b6b5b3;
   margin: 0 auto;
   padding: 0 10px; }
@@ -97,5 +103,24 @@ nav a {
   display: flex;
   justify-content: center;
   align-items: center; }
+
+.movieResults {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100vw;
+  height: auto;
+  font-size: 12px; }
+
+.movieResult {
+  width: 40vw;
+  height: auto;
+  margin: 10px; }
+
+.movieResults img {
+  width: 40vw;
+  height: auto; }
+
+.movieResults h3 {
+  font-size: 16px; }
 
 /*# sourceMappingURL=style.css.map */
