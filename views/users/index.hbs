@@ -1,3 +1,8 @@
+{{#each similarityScores}}
+  {{this.similarity}}
+  {{this.id}}
+{{/each}}
+
 {{#if user.image}}
 <img src="{{user.image}}" alt="{{user.username}} image"/>
 {{else}}
@@ -11,7 +16,7 @@
 
 <h3>Similar users</h3>
 <ul>
-{{#each similarUsers}}
+{{#each reviewsOfAllUsers}}
 <li><a href="/user/{{this._id}}">{{this.username}}</a></li>
 {{/each}}
 </ul>

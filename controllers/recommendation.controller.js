@@ -1,80 +1,69 @@
 const controller = {}
 const Review = require("../models/Review");
-require('../configs/db.config');
+user = {};
 
-controller.findNearestNeighbours();
-// Predicts user ratings based on similarity scores
-controller.inferRatings = (req, res, next) => {
-  //TODO add scores brought from API so algorithm is more intelligent
-  //Change "select" on movies to "not seen", change value on option too
-  //Then do: if (rating == 'not seen') {rating = null;}
-  //If in 0-100 format, do: Math.round(Rating/10)
-
-      findNearestNeighbours(newUser);
-      // k value can be adjusted according to needs
-      let k = 2;
-      let weightedSum = 0;
-      let similaritySum = 0;
-      for (let j = 0; j < k; j++) {
-        let name = allData[j]["user"];
-        let sim = similarityScores["user"];
-        let ratings = allData[j];
-        let rating = ratings["movie"];
-        if (rating != null) {
-          weightedSum += rating * sim;
-          similaritySum += sim;
-        }
+// Finds users with closest movie ratings
+controller.findNearestNeighbours = (res, next, cu) => {
+  Review.find({}, "movie user score", function(err, docs) {}).then(
+    reviewsOfAllUsers => {
+  
+      function compareSimilarity(a, b) {
+        let score1 = similarityScores[a.user];
+        let score2 = similarityScores[b.user];
+        return score2 - score1;
       }
   
-      let stars = Math.round(weightedSum / similaritySum);
-      return stars;
-}
-
-// Finds the k users with the closest similarity score
-controller.findNearestNeighbours = (req, res, next, user) => {
-  Review.find({}, "movie user score", function(err, docs) {}).then( (allData) => {
-    // console.log(allData)
-      
-      let similarityScores = {};
-      for (let i = 0; i < allData.length; i++) {
-        let current = user["_id"];
-        for (let j = 0; j < allData.length; j++) {
-          let other = allData[j]["user"];
-          // console.log(other)
-          if (other != current) {
+      let similarityScores = [];
+      let totalReviewsToVisit = 0;
+      let totalReviewsVisited = 0;
   
-            console.log(current)
-            console.log(other)
-            // let similarity = euclideanDistance(current, other);
-            console.log(current + " /// " + other)
-            similarityScores[current] = similarity;
-          } else {
-            similarityScores[current] = -1;
-          }
-        }
-      
-            // Sort data
-        allData.sort(compareSimilarity);
-        function compareSimilarity(a, b) {
-          let score1 = similarityScores[a.user];
-          // console.log(score1)
-          let score2 = similarityScores[b.user];
-          // console.log(score2)
-          return score2 - score1;
-        }
-        // console.log(similarityScores)
-        return similarityScores;
-    }
-    // console.log("holi")
+      let current = cu["_id"];
 
+      for (let j = 0; j < reviewsOfAllUsers.length; j++) {
+        let other = reviewsOfAllUsers[j]["user"];
+        let currentStr = current.toString();
+        let otherStr = other.toString();
 
-   
-    
-  });
+        if (otherStr !== currentStr) {
+          totalReviewsToVisit++;
+        }
+      }
+
+      for (let j = 0; j < reviewsOfAllUsers.length; j++) {
+        let other = reviewsOfAllUsers[j]["user"];
+        let currentStr = current.toString();
+        let otherStr = other.toString();
+        
+        if (otherStr != currentStr) {
+          euclideanDistance(current, other, function(similarity) {
+            similarityScores.push({
+              similarity: similarity,
+              id: other
+            });
+            totalReviewsVisited++;
+              
+            if (totalReviewsToVisit === totalReviewsVisited) {
+
+                // Sort data
+                similarityScores = similarityScores.sort((a, b) => {
+                  if (a.similarity > b.similarity)  return -1
+                })
+
+                similarityScores = similarityScores.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{});
+
+              res.render("users/index", { user, similarityScores })
+            }
+            
+          });
+          
+        }
+      }
+
+    })
 }
-
-// Compares two users and returns similiraty scores
-function euclideanDistance(userId1, userId2) {
+  
+// Compares two users and returns similarity scores
+function euclideanDistance(userId1, userId2, cb) {
   let promise1 = Review.find({ user: userId1 })
     .then(review => {
       return review;
@@ -87,7 +76,7 @@ function euclideanDistance(userId1, userId2) {
     })
     .catch(err => console.log(err));
 
-  let similarity = Promise.all([promise1, promise2]).then(data => {
+  Promise.all([promise1, promise2]).then(data => {
     let myReviews = data[0];
     let otherReviews = data[1];
     let sumSquares = 0;
@@ -105,16 +94,21 @@ function euclideanDistance(userId1, userId2) {
     }
     let d = Math.sqrt(sumSquares);
     similarity = 1 / (1 + d);
-    // return similarity;
-    // console.log(similarity);
-    // similarityReport(similarity)
+
+    cb(similarity);
   });
 }
 
-function similarityReport(similarity){
-
+function removeDuplicates(originalArray, prop) {
+  var newArray = [];
+  var lookupObject  = {};
+  for(var i in originalArray) {
+     lookupObject[originalArray[i][prop]] = originalArray[i];
+  }
+  for(i in lookupObject) {
+      newArray.push(lookupObject[i]);
+  }
+   return newArray;
 }
-
-euclideanDistance("5d8a0159355bce661226fea4", "5d8a0159355bce661226fea5");
 
 module.exports = controller;
