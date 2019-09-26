@@ -38,9 +38,29 @@ router.get('/info/:id', (req, res, next) => {
   moviesDB.getById(id)
     .then((response) => {
       const movie = response.data
-      res.render('movies/info', movie)
+      Movie.findOne({ APIid: id })
+        .populate('review')
+        .then((movieLocal) => {
+          if (!!movieLocal) {
+            const score = movieLocal.review;
+            res.render('movies/info', { movie, score })
+          }
+          else res.render('movies/info', { movie })
+        })
+        .catch(err => {
+          throw err
+        })
     })
     .catch(err => next(err))
+})
+
+router.post('/info/score/:scoreId', secure.checkIfLogged, (req, res, next) => {
+  const rating = req.body.rating;
+  Review.findByIdAndUpdate(req.params.scoreId, { score: rating }, { new: true })
+    .then(res.redirect('back'))
+    .catch((err) => {
+      throw err
+    })
 })
 
 router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
@@ -51,35 +71,35 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
   //TODO faltan director y casting
   //TODO comprobacion de que la peli
   // no esta ya en nuestra BD
-  Movie.findOne({APIid: movieId}, (err, movie) => {
-    if(movie) {
-      Review.create({
-          user: userId,
-          movie: movie._id,
-          score: rating
-        }).then(res.redirect('/'))
-      } else {
-        moviesDB.getById(movieId).
-        then((response) => {
-          const movie = response.data
-          Movie.create({
-            APIid: movieId,
-            title: movie.title,
-            year: movie.release_date,
-            poster: movie.poster_path,
-            duration: movie.runtime,
-            genre: movie.genres,
-            sinopsis: movie.overview
-          }).then((movie) => {
-            Review.create({
-              user: userId,
-              movie: movie._id,
-              score: rating
+  Movie.findOne({ APIid: movieId }, (err, movie) => {
+    moviesDB.getById(movieId).
+      then((response) => {
+        const movie = response.data
+        Movie.create({
+          APIid: movieId,
+          title: movie.title,
+          year: movie.release_date,
+          poster: movie.poster_path,
+          duration: movie.runtime,
+          genre: movie.genres,
+          sinopsis: movie.overview,
+        }).then((movie) => {
+          Review.create({
+            user: userId,
+            movie: movie._id,
+            score: rating
+          }).then((newReview) => {
+            Movie.updateOne(
+              { APIid: movieId },
+              { review: newReview._id },
+              { new: true }
+            ).then(() => {
+              res.redirect('back');
             })
-          }).then(res.redirect('/'))
-        }).catch((err) => next(err));
-      }
-    });
+          })
+        })
+      }).catch((err) => next(err));
+  });
 });
 
 module.exports = router;
