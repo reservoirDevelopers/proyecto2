@@ -4,6 +4,7 @@ const Schema   = mongoose.Schema;
 const reviewSchema = new Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
+  username: String,
   score: Number,
   title: String,
   comment: String,

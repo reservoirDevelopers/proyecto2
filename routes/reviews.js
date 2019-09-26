@@ -14,18 +14,24 @@ router.get('/reviews/:id', (req, res, next) => {
   Movie.findOne({ APIid: id })
     .populate('review')
     .then((movie) => {
-      const user = req.user
       const reviews = movie.review
-      res.render('reviews/reviews', { reviews, movie, user })
+      let reviewUser;
+      reviews.map((rew) => {
+        ((rew.user).toString() === (req.user._id).toString()) ? reviewUser = rew : 0
+      });
+      console.log('=======HEEEEY======', reviewUser)
+      console.log('=======Hola=====',reviews)
+      res.render('reviews/reviews', { reviews, reviewUser, movie })
     })
 })
 
-router.post('/write-review/:id', (req, res, next) => {
+router.post('/writeReview/:id', (req, res, next) => {
   const id = req.params.id;
-  const { comment } = req.body;
-  Review.findByIdAndUpdate(id, { comment: comment }, { new: true })
+  const { comment, title } = req.body;
+  console.log('=======Hola=====', id)
+  Review.findByIdAndUpdate(id, { comment: comment, title: title, username: req.user.username }, { new: true })
     .then(() => {
-      console.log('Review created')
+      console.log('Review updated')
       res.redirect('back')
     })
 })

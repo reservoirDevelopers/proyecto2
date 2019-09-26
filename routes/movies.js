@@ -47,6 +47,7 @@ router.get('/info/:id', (req, res, next) => {
               movieLocal.review.map((rew) => {
                 ((rew.user).toString() === (req.user._id).toString()) ? score = rew : 0
               });
+              console.log(score._id)
               res.render('movies/info', { movie, score })
             } else res.render('movies/info', { movie })
           }

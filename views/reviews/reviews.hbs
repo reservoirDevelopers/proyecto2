@@ -1,14 +1,20 @@
 <h1>Reviews</h1>
 
 {{#each reviews}}
-<h5>Usuario: {{user}}</h5>
-<p>Score: {{score}}</p>
-<p>Comentario: {{comment}}</p>
-<hr>
+<div class="reviewGrid">
+<div class="div1">User:</div>
+<div class="div2">{{username}}</div>
+<div class="div3">Rating: {{score}}</div>
+<div class="div4">Title:</div>
+<div class="div5">{{title}}</div>
+<div class="div6">{{comment}}</div>
+</div>
 {{/each}}
 
 
-<form action="/write-review/{{reviews._id}}" method="post">
+ 
+<form action="/writeReview/{{reviewUser._id}}" id="writeRvw" class="flex-column" method="post">
+  <input name="title" id="titleRvw" type="text" placeholder="Title here">
   <textarea name="comment" id="writeReview" cols="30" rows="10"></textarea>
-  <button type="submit">Add review</button>
+  <button class="reviews" type="submit">Add review</button>
 </form>

@@ -8,13 +8,15 @@ body {
   color: #bebebe;
   font-size: 18px;
   font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
-  padding-top: 40px; }
+  padding-top: 40px;
+  margin-bottom: 40px; }
 
 textarea {
   margin: 0 auto;
   width: 90vw;
   background-color: rgba(255, 255, 255, 0.05);
-  color: #E5E5E5; }
+  color: #E5E5E5;
+  height: fit-content; }
 
 h1, h3 {
   text-align: center;
@@ -157,7 +159,8 @@ nav a {
   margin: 15px;
   padding: 10px;
   font-size: 16px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  font-weight: bold; }
 
 .reviews input {
   font-size: 20px;
@@ -171,5 +174,93 @@ nav a {
   justify-content: center;
   width: 80vw;
   height: auto; }
+
+.reviewGrid {
+  display: grid;
+  background-color: rgba(128, 128, 128, 0.3);
+  margin: 15px;
+  padding: 10px;
+  grid-template-columns: 1fr 6fr 2fr;
+  grid-template-rows: repeat(3, minmax(auto, auto));
+  grid-column-gap: 5px;
+  grid-row-gap: 5px; }
+  .reviewGrid .div1 {
+    grid-area: 1 / 1 / 2 / 2; }
+  .reviewGrid .div2 {
+    grid-area: 1 / 2 / 2 / 3; }
+  .reviewGrid .div3 {
+    grid-area: 1 / 3 / 2 / 4; }
+  .reviewGrid .div4 {
+    grid-area: 2 / 1 / 3 / 2; }
+  .reviewGrid .div5 {
+    grid-area: 2 / 2 / 3 / 4; }
+  .reviewGrid .div6 {
+    grid-area: 3 / 1 / 4 / 4; }
+
+#writeRvw {
+  justify-content: center;
+  margin: 0 auto;
+  width: 90vw; }
+
+#writeRvw input {
+  color: #E6DF44;
+  margin: 0 10px; }
+
+#writeRvw ::-webkit-input-placeholder {
+  text-align: center;
+  color: rgba(230, 222, 68, 0.6); }
+
+#writeRvw button {
+  width: 60vw;
+  color: #14213D; }
+
+.searchContainer {
+  justify-content: center;
+  height: 70vh; }
+
+.searchContainer input {
+  color: #E6DF44;
+  font-weight: bold; }
+
+.signup {
+  justify-content: center;
+  width: 80vw;
+  margin: 0 auto; }
+
+.google {
+  margin-bottom: 20px; }
+
+.signup label {
+  background-color: #E6DF44;
+  color: #14213D;
+  font-size: 16px;
+  font-weight: bold;
+  width: 80vw;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-top: 10px; }
+
+.signup input {
+  color: #E5E5E5; }
+
+.signup .select-wrapper {
+  width: 80vw;
+  margin: 10px;
+  background-color: rgba(229, 229, 229, 0.25); }
+
+.signup button {
+  background-color: #E5E5E5;
+  color: #14213D;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  margin: 20px;
+  border-radius: 5px; }
+
+.photo {
+  background-color: rgba(229, 229, 229, 0.25);
+  width: 80vw;
+  margin: 10px; }
 
 /*# sourceMappingURL=style.css.map */
