@@ -100,24 +100,6 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
 });
 });
 
-router.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email"
-    ]
-  })
-);
-
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/user/me",
-    failureRedirect: "/auth/login" 
-  })
-);
-
 router.get("/confirm/:token", (req, res, next) => {
   const token = req.params.token;
   User.findOne({ confirmationCode: token })
@@ -135,5 +117,23 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/user/me",
+    failureRedirect: "/auth/login" 
+  })
+);
 
 module.exports = router;
