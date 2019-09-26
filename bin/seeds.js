@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Movie = require("../models/Movie");
 const Review = require("../models/Review");
+require('dotenv').config();
 
 const bcryptSalt = 10;
 
