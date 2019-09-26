@@ -11,18 +11,22 @@ const secure = require("../middlewares/secure.mid");
 
 router.get('/reviews/:id', (req, res, next) => {
   const id = req.params.id
-  Review.find({ id: id })
-    .then((reviews) => {
-      res.render('reviews/reviews', { reviews })
+  Movie.findOne({ APIid: id })
+    .populate('review')
+    .then((movie) => {
+      const user = req.user
+      const reviews = movie.review
+      res.render('reviews/reviews', { reviews, movie, user })
     })
 })
 
-router.post('/write-review', (req, res, next) => {
+router.post('/write-review/:id', (req, res, next) => {
+  const id = req.params.id;
   const { comment } = req.body;
-  Review.create({ comment })
+  Review.findByIdAndUpdate(id, { comment: comment }, { new: true })
     .then(() => {
       console.log('Review created')
-      res.redirect('index')
+      res.redirect('back')
     })
 })
 

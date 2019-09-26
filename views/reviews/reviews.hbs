@@ -1,22 +1,14 @@
 <h1>Reviews</h1>
 
-{{this.comment}}
-{{review.comment}}
+{{#each reviews}}
+<h5>Usuario: {{user}}</h5>
+<p>Score: {{score}}</p>
+<p>Comentario: {{comment}}</p>
+<hr>
+{{/each}}
 
-<form action="/write-review" method="post">
- <select name="rating" onchange="ratingForm.submit()">
-        <option value="">Not seen</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-  </select>
-  <textarea name="writeReview" id="writeReview" cols="30" rows="10"></textarea>
+
+<form action="/write-review/{{reviews._id}}" method="post">
+  <textarea name="comment" id="writeReview" cols="30" rows="10"></textarea>
   <button type="submit">Add review</button>
 </form>

@@ -12,7 +12,7 @@ const movieSchema = new Schema({
 	country: [String],
 	sinopsis: String,
 	poster: String,
-	review: { type: mongoose.Schema.Types.ObjectId, ref: 'Review' },
+	review: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 }, {
   timestamps: {
     createdAt: 'created_at',

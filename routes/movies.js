@@ -42,8 +42,13 @@ router.get('/info/:id', (req, res, next) => {
         .populate('review')
         .then((movieLocal) => {
           if (!!movieLocal) {
-            const score = movieLocal.review;
-            res.render('movies/info', { movie, score })
+            if (movieLocal.review.some(rew => (rew.user).toString() == (req.user._id).toString())) {
+              let score;
+              movieLocal.review.map((rew) => {
+                ((rew.user).toString() === (req.user._id).toString()) ? score = rew : 0
+              });
+              res.render('movies/info', { movie, score })
+            } else res.render('movies/info', { movie })
           }
           else res.render('movies/info', { movie })
         })
@@ -71,35 +76,53 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
   //TODO faltan director y casting
   //TODO comprobacion de que la peli
   // no esta ya en nuestra BD
-  Movie.findOne({ APIid: movieId }, (err, movie) => {
-    moviesDB.getById(movieId).
-      then((response) => {
-        const movie = response.data
-        Movie.create({
-          APIid: movieId,
-          title: movie.title,
-          year: movie.release_date,
-          poster: movie.poster_path,
-          duration: movie.runtime,
-          genre: movie.genres,
-          sinopsis: movie.overview,
-        }).then((movie) => {
-          Review.create({
-            user: userId,
-            movie: movie._id,
-            score: rating
-          }).then((newReview) => {
-            Movie.updateOne(
-              { APIid: movieId },
-              { review: newReview._id },
-              { new: true }
-            ).then(() => {
-              res.redirect('back');
-            })
+  Movie.findOne({ APIid: movieId })
+    .then((movie) => {
+      if (!!movie) {
+        Review.create({
+          user: userId,
+          movie: movie._id,
+          score: rating
+        }).then((newReview) => {
+          Movie.updateOne(
+            { APIid: movieId },
+            { $push: { review: newReview._id } },
+            { new: true }
+          ).then(() => {
+            res.redirect('back');
           })
         })
-      }).catch((err) => next(err));
-  });
+      } else {
+        moviesDB.getById(movieId).
+          then((response) => {
+            const movie = response.data
+            Movie.create({
+              APIid: movieId,
+              title: movie.title,
+              year: movie.release_date,
+              poster: movie.poster_path,
+              duration: movie.runtime,
+              genre: movie.genres,
+              sinopsis: movie.overview,
+            }).then((movie) => {
+              Review.create({
+                user: userId,
+                movie: movie._id,
+                score: rating
+              }).then((newReview) => {
+                Movie.updateOne(
+                  { APIid: movieId },
+                  { $push: { review: newReview._id } },
+                  { new: true }
+                ).then(() => {
+                  res.redirect('back');
+                })
+              })
+            })
+          }).catch((err) => next(err));
+      }
+    })
+
 });
 
 module.exports = router;
