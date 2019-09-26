@@ -23,6 +23,7 @@ const userSchema = new Schema({
   },
   image: String,
   friends: { type: Array },
+  GoogleID: { type: String }
 }, {
   timestamps: {
     createdAt: 'created_at',
