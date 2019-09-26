@@ -9,6 +9,9 @@ const multer = require('multer');
 const upload = multer({ dest: './public/uploads/' });
 
 let transporter = require("../configs/nodemailer.config");
+const ensureLogin = require("connect-ensure-login");
+
+
 
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -96,6 +99,24 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
   });
 });
 });
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/user/me",
+    failureRedirect: "/auth/login" 
+  })
+);
 
 router.get("/confirm/:token", (req, res, next) => {
   const token = req.params.token;
