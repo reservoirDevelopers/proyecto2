@@ -8,7 +8,7 @@ body {
   background-color: rgb(20, 20, 20);
   color: rgb(190, 190, 190);
   font-size: 18px;
-  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
   padding-top: 40px;
 }
 
@@ -16,12 +16,13 @@ textarea {
   margin: 0 auto;
   width: 90vw;
   background-color: rgba(255, 255, 255, 0.05);
-  color: #E5E5E5;
+  color: #e5e5e5;
 }
 
-h1, h3 {
+h1,
+h3 {
   text-align: center;
-  color: #E6DF44;
+  color: #e6df44;
 }
 
 .movieCard img {
@@ -30,12 +31,11 @@ h1, h3 {
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.65);
 }
 
-
 .movieCard h1 {
   font-size: 20px;
   text-align: center;
   margin: 20px;
-  color: #E6DF44;
+  color: #e6df44;
 }
 
 .movieCard {
@@ -74,23 +74,59 @@ nav a {
   grid-template-rows: repeat(5, minmax(auto, auto));
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  .div1 { grid-area: 1 / 1 / 2 / 5; }
-  .div2 { grid-area: 2 / 1 / 3 / 2; }
-  .div3 { grid-area: 2 / 2 / 3 / 4; }
-  .div4 { grid-area: 2 / 4 / 5 / 5; }
-  .div5 { grid-area: 3 / 1 / 4 / 2; }
-  .div6 { grid-area: 3 / 2 / 4 / 4; }
-  .div7 { grid-area: 4 / 1 / 5 / 2; }
-  .div8 { grid-area: 4 / 2 / 5 / 4; }
-  .div9 { grid-area: 5 / 1 / 6 / 2; }
-  .div10 { grid-area: 5 / 2 / 6 / 5; }
+  .div1 {
+    grid-area: 1 / 1 / 2 / 5;
   }
+  .div2 {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .div3 {
+    grid-area: 2 / 2 / 3 / 4;
+  }
+  .div4 {
+    grid-area: 2 / 4 / 5 / 5;
+  }
+  .div5 {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .div6 {
+    grid-area: 3 / 2 / 4 / 4;
+  }
+  .div7 {
+    grid-area: 4 / 1 / 5 / 2;
+  }
+  .div8 {
+    grid-area: 4 / 2 / 5 / 4;
+  }
+  .div9 {
+    grid-area: 5 / 1 / 6 / 2;
+  }
+  .div10 {
+    grid-area: 5 / 2 / 6 / 5;
+  }
+}
 
-  .date {
-    width: 4ch;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+.user-profile {
+  display: grid;
+  margin: 15px;
+  padding: 10px;
+  background-color: rgba(128, 128, 128, 0.3);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  .div1 { grid-area: 1 / 1 / 2 / 4; }
+  .div2 { grid-area: 2 / 1 / 3 / 4; }
+  .div3 { grid-area: 3 / 1 / 4 / 4; }
+  .div4 { grid-area: 4 / 1 / 5 / 4; }
+  .div5 { grid-area: 1 / 4 / 5 / 6; }
+}
+
+.date {
+  width: 4ch;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
 .flex {
   display: flex;
@@ -131,7 +167,7 @@ nav a {
   height: auto;
   margin: 10px;
 }
-  
+
 .movieResults img {
   width: 40vw;
   height: auto;
@@ -145,7 +181,7 @@ nav a {
   background-color: rgba(255, 255, 255, 0.5);
   margin: 15px;
   padding: 10px;
-  color: #14213D;
+  color: #14213d;
   font-size: 16px;
 }
 
@@ -153,8 +189,8 @@ nav a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #14213D;
-  color: #FFFFFF;
+  background-color: #14213d;
+  color: #ffffff;
   margin-left: 10px;
   font-size: 20px;
   border-radius: 50%;
@@ -167,7 +203,7 @@ nav a {
 }
 
 .reviews {
-  background-color: #E6DF44;
+  background-color: #e6df44;
   margin: 15px;
   padding: 10px;
   font-size: 16px;
@@ -176,7 +212,7 @@ nav a {
 
 .reviews input {
   font-size: 20px;
-  color: #14213D;
+  color: #14213d;
 }
 
 #logotipe {
@@ -187,4 +223,14 @@ nav a {
   justify-content: center;
   width: 80vw;
   height: auto;
+}
+
+.profile-picture {
+  width: 100px;
+  height: auto;
+}
+
+.friend img {
+  height: 30px;
+  width: 30px;
 }

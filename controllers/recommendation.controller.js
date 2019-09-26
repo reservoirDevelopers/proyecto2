@@ -51,7 +51,7 @@ controller.findNearestNeighbours = (res, next, cu) => {
 
                 similarityScores = similarityScores.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{});
 
-              res.render("users/index", { user, similarityScores })
+              res.render("users/similar", { cu, similarityScores })
             }
             
           });

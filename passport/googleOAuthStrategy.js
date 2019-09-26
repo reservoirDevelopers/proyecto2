@@ -7,7 +7,7 @@ passport.use(
   new GoogleStrategy({
     clientID: `${process.env.GOOGLE_ID}`,
     clientSecret: `${process.env.GOOGLE_SECRET}`,
-    callbackURL: "/auth/google/callback"
+    callbackURL: `/auth/google/callback`
   },
   (accessToken, refreshToken, profile, done) => {
     User.findOne({googleID: profile.id})
@@ -16,7 +16,7 @@ passport.use(
         done(null, user);
         return
       }
-      User.create({googleID: profile.id, username: profile.email})
+      User.create({googleID: profile.id, username: profile.displayName, email: profile.email})
       .then(newUser => {
         done(null, newUser)
       })

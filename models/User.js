@@ -5,6 +5,7 @@ const userSchema = new Schema({
   email: String,
   username: String,
   password: String,
+  review: { type: mongoose.Schema.Types.ObjectId, ref: 'Review' },
   city: String,
   country: String,
   gender: { type: String,
@@ -18,7 +19,6 @@ const userSchema = new Schema({
   },
   confirmationCode: {
     type: String,
-    required: true,
     unique: true
   },
   image: String,

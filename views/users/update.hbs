@@ -1,0 +1,41 @@
+<h2>Update your data</h2>
+
+<form action="/user/update" method="POST" id="form-container" enctype="multipart/form-data">
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email" value="{{user.email}}">
+
+  <br><br>
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" value="{{user.username}}">
+
+  <br><br>
+ 
+  <label for="select">Gender</label>
+  <select name="gender"> 
+    <option value="{{user.gender}}"> - {{user.gender}} - </option>
+    <option value="female">female</option>
+    <option value="male">male</option>
+    <option value="non-binary">non-binary</option>
+    <option value="prefer not to say">prefer not to say</option>
+  </select>
+
+  <br><br>
+
+  <label for="city">City</label>
+  <input id="city" type="text" name="city" value="{{user.city}}">
+  
+  <br><br>
+
+  <label for="country">Country</label>
+  <input id="country" type="text" name="country" value="{{user.country}}">
+  
+  <br><br>
+
+  {{!-- <label for="photo">Profile picture</label>
+  <input type="file" name="your photo" value="your photo"> --}}
+  
+  <br><br>
+
+  <button type="submit">Update profile</button>
+
+</form>

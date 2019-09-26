@@ -1,29 +1,22 @@
-
-
-{{#if user.image}}
-<img src="{{user.image}}" alt="{{user.username}} image"/>
-
-{{else}}
-<img src="https://media.giphy.com/media/3o7rc0qU6m5hneMsuc/giphy.gif" alt="{{user.username}} image"/>
-<a href="">Change profile picture</a>
-{{/if}}
-<h3>{{user.username}}</h3>
-<a href="/user/update">Update your data</a>
-<a href="/user/delete">Delete your account</a>
-
-
-<h3>Your statistics</h3>
-{{!-- Statistics from user --}}
-
-<h3>Similar users</h3>
-<ul>
-{{#each reviewsOfAllUsers}}
-<li><a href="/user/{{this._id}}">{{this.username}}</a></li>
-{{/each}}
-{{#each similarityScores}}
-  {{this.similarity}}
-  {{this.id}}
-{{/each}}
-</ul>
-
-<h3>Connections</h3>
+<h1>Profile page</h1>
+<div class="user-profile">
+  <div class="div1">
+  <h2>{{user.username}}</h2>
+  <p>{{#if user.city}}{{user.city}}, {{/if}}{{#if user.country}}{{user.country}}{{/if}}</p>
+  <h4>Profile options</h4>
+  <ul>
+    <li><a href="/user/update">Update profile</a></li>
+    <li><a href="/user/delete">Delete your account</a></li>
+  </ul>
+  </div>
+<div class="div2">
+    <h4>Connections and similar users</h4>
+  <ul>
+    <li><a href="/user/similar">Similar users</a></li>
+    <li><a href="/user/connection">User connections</a></li>
+  </ul>
+</div>
+<div class="div3">
+  <h4>Your statistics</h4>
+  {{!-- Statistics from user --}}
+</div>
