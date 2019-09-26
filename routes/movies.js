@@ -21,7 +21,6 @@ router.post('/result', (req, res, next) => {
   const query = req.body.search;
   moviesDB.getBySearch(query)
     .then((response) => {
-      console.log(response.data.results)
       const movie = response.data.results
       res.render('movies/result', { movie })
     })
@@ -39,7 +38,6 @@ router.get('/info/:id', (req, res, next) => {
   moviesDB.getById(id)
     .then((response) => {
       const movie = response.data
-      console.log(movie)
       res.render('movies/info', movie)
     })
     .catch(err => next(err))
@@ -82,9 +80,6 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
         }).catch((err) => next(err));
       }
     });
-
-
-
 });
 
 module.exports = router;

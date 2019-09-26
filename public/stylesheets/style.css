@@ -10,6 +10,12 @@ body {
   font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
   padding-top: 40px; }
 
+textarea {
+  margin: 0 auto;
+  width: 90vw;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #E5E5E5; }
+
 h1, h3 {
   text-align: center;
   color: #E6DF44; }
@@ -37,7 +43,8 @@ nav {
   left: 0;
   width: 100vw;
   padding: 20px 0;
-  background-color: rgba(20, 20, 20, 0.4); }
+  background-color: rgba(20, 20, 20, 0.4);
+  z-index: 1; }
 
 nav a {
   text-decoration: none;
@@ -122,5 +129,47 @@ nav a {
 
 .movieResults h3 {
   font-size: 16px; }
+
+.rating {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 15px;
+  padding: 10px;
+  color: #14213D;
+  font-size: 16px; }
+
+.rate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #14213D;
+  color: #FFFFFF;
+  margin-left: 10px;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 12vw;
+  height: 12vw; }
+
+.vote {
+  justify-content: space-around; }
+
+.reviews {
+  background-color: #E6DF44;
+  margin: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 3px; }
+
+.reviews input {
+  font-size: 20px;
+  color: #14213D; }
+
+#logotipe {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  top: 40px;
+  justify-content: center;
+  width: 80vw;
+  height: auto; }
 
 /*# sourceMappingURL=style.css.map */

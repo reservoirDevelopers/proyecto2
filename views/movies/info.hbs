@@ -1,40 +1,51 @@
-<h1>. .</h1>
+  <div class="rating flex">
+    <div class="ratext"><h5>Rating:</h5></div>
+    <div class="rate">{{vote_average}}</div>
+  </div>
+
 
 
 <div class="parent">
-<div class="div1"><h3>{{title}}</h3></div>
-<div class="div2"><p>Year:</p></div>
-<div class="div3"><p class="date">{{release_date}}</p></div>
-<div class="div4"><img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{backdrop_path}}" alt=""></div>
-<div class="div5"><p>Duration:</p></div>
-<div class="div6"><p>{{runtime}} minutes</p></div>
-<div class="div7"><p>Genres:</p></div>
-<div class="div8">{{#each genres}}<p>{{this.name}}</p>{{/each}}</div>
-<div class="div9"><p>Overview:</p></div>
-<div class="div10"><p>{{overview}}</p></div>
+  <div class="div1"><h3>{{title}}</h3></div>
+  <div class="div2"><p>Year:</p></div>
+  <div class="div3"><p class="date">{{release_date}}</p></div>
+  <div class="div4"><img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{backdrop_path}}" alt=""></div>
+  <div class="div5"><p>Duration:</p></div>
+  <div class="div6"><p>{{runtime}} minutes</p></div>
+  <div class="div7"><p>Genres:</p></div>
+  <div class="div8">{{#each genres}}<p>{{this.name}}</p>{{/each}}</div>
+  <div class="div9"><p>Overview:</p></div>
+  <div class="div10"><p>{{overview}}</p></div>
+</div>
+
+<div class="flex vote">
+  <h5>Your vote:</h5>
+  <div class="input-field col s12">
+    <form action="/info/{{id}}" method="POST" name="ratingForm">
+      <select name="rating" onchange="ratingForm.submit()">
+        <option value="">Not seen</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </form>
+  </div>
+</div>
+
+<div class="reviews flex">
+  <form action="/reviews/{{id}}" method="GET" name="reviews">
+  <input type="submit" value="See reviews">
+  </form>
 </div>
 
 
-<div="flex">
-  <h4>Rating: {{vote_average}}</h4>
-  <h4>Your vote:</h4>
-  <div class="input-field col s12">
-    <form action="/info/{{id}}" method="POST" name="ratingForm">
-    <select name="rating" onchange="ratingForm.submit()">
-      <option value="">Not seen</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </form>
-  </div>
-</div="flex">
 
 
 

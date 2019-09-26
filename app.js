@@ -54,7 +54,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Movie Pals';
 
 
 // Enable authentication using session + passport
@@ -79,5 +79,8 @@ app.use('/', movies);
 
 const users = require('./routes/users');
 app.use('/', users);
+
+const reviews = require('./routes/reviews');
+app.use('/', reviews)
 
 module.exports = app;
