@@ -1,6 +1,6 @@
 # Movie Pals
 
-# Instrucciones:
+## Instrucciones:
 
 1. Instalar los paquetes necesarios con el comando `npm install`.
 1. Crear un archivo '.env' que contenga la variable `PORT=3000`
