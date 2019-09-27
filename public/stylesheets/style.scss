@@ -17,12 +17,8 @@ textarea {
   margin: 0 auto;
   width: 90vw;
   background-color: rgba(255, 255, 255, 0.05);
-<<<<<<< HEAD
   color: #E5E5E5;
   height: fit-content;
-=======
-  color: #e5e5e5;
->>>>>>> 788532d5ba1d8ad782067a54fdf3f454a1799c8f
 }
 
 h1,
@@ -232,7 +228,6 @@ nav a {
   height: auto;
 }
 
-<<<<<<< HEAD
 .reviewGrid {
   display: grid;
   background-color: rgba(128, 128, 128, 0.3);
@@ -248,87 +243,87 @@ nav a {
   .div4 { grid-area: 2 / 1 / 3 / 2; }
   .div5 { grid-area: 2 / 2 / 3 / 4; }
   .div6 { grid-area: 3 / 1 / 4 / 4; }
-  }
+}
 
-  #writeRvw {
-    justify-content: center;
-    margin: 0 auto;
-    width: 90vw;
-  }
+#writeRvw {
+  justify-content: center;
+  margin: 0 auto;
+  width: 90vw;
+}
 
-  #writeRvw input {
-    color: #E6DF44;
-    margin: 0 10px;
-  }
+#writeRvw input {
+  color: #E6DF44;
+  margin: 0 10px;
+}
 
-  #writeRvw ::-webkit-input-placeholder {
-    text-align: center;
-    color: rgba(230, 222, 68, 0.6);
-  }
+#writeRvw ::-webkit-input-placeholder {
+  text-align: center;
+  color: rgba(230, 222, 68, 0.6);
+}
 
-  #writeRvw button {
-    width: 60vw;
-    color: #14213D;
-  }
+#writeRvw button {
+  width: 60vw;
+  color: #14213D;
+}
 
-  .searchContainer {
-    justify-content: center;
-    height: 70vh;
-  }
+.searchContainer {
+  justify-content: center;
+  height: 70vh;
+}
 
-  .searchContainer input {
-    color: #E6DF44;
-    font-weight: bold;
-  }
+.searchContainer input {
+  color: #E6DF44;
+  font-weight: bold;
+}
 
-  .signup {
-    justify-content: center;
-    width: 80vw;
-    margin: 0 auto;
-  }
+.signup {
+  justify-content: center;
+  width: 80vw;
+  margin: 0 auto;
+}
 
-  .google {
-    margin-bottom: 20px;
-  }
+.google {
+  margin-bottom: 20px;
+}
 
-  .signup label {
-    background-color: #E6DF44;
-    color: #14213D;
-    font-size: 16px;
-    font-weight: bold;
-    width: 80vw;
-    padding: 5px 10px;
-    border-radius: 3px;
-    margin-top:10px;
-  }
+.signup label {
+  background-color: #E6DF44;
+  color: #14213D;
+  font-size: 16px;
+  font-weight: bold;
+  width: 80vw;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-top:10px;
+}
 
-  .signup input {
-    color: #E5E5E5;
-  }
+.signup input {
+  color: #E5E5E5;
+}
 
-  .signup .select-wrapper {
-    width: 80vw;
-    margin: 10px;
-    background-color: rgba(229, 229, 229, 0.25);
-  }
+.signup .select-wrapper {
+  width: 80vw;
+  margin: 10px;
+  background-color: rgba(229, 229, 229, 0.25);
+}
 
-  .signup button {
-    background-color: #E5E5E5;
-    color: #14213D;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    margin: 20px;
-    border-radius: 5px;
-  }
+.signup button {
+  background-color: #E5E5E5;
+  color: #14213D;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  margin: 20px;
+  border-radius: 5px;
+}
 
-  .photo {
-    background-color: rgba(229, 229, 229, 0.25);
-    width: 80vw;
-    margin: 10px;
-  }
-=======
+.photo {
+  background-color: rgba(229, 229, 229, 0.25);
+  width: 80vw;
+  margin: 10px;
+}
+
 .profile-picture {
   width: 100px;
   height: auto;
@@ -338,4 +333,3 @@ nav a {
   height: 30px;
   width: 30px;
 }
->>>>>>> 788532d5ba1d8ad782067a54fdf3f454a1799c8f
