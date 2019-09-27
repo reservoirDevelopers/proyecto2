@@ -97,15 +97,13 @@ nav a {
   grid-column-gap: 10px;
   grid-row-gap: 10px; }
   .user-profile .div1 {
-    grid-area: 1 / 1 / 2 / 4; }
+    grid-area: 1 / 1 / 2 / 6; }
   .user-profile .div2 {
-    grid-area: 2 / 1 / 3 / 4; }
+    grid-area: 2 / 1 / 3 / 6; }
   .user-profile .div3 {
-    grid-area: 3 / 1 / 4 / 4; }
+    grid-area: 3 / 1 / 4 / 6; }
   .user-profile .div4 {
-    grid-area: 4 / 1 / 5 / 4; }
-  .user-profile .div5 {
-    grid-area: 1 / 4 / 5 / 6; }
+    grid-area: 4 / 1 / 5 / 6; }
 
 .date {
   width: 4ch;
@@ -291,5 +289,33 @@ nav a {
 .friend img {
   height: 30px;
   width: 30px; }
+
+.delete {
+  background-color: red;
+  color: white;
+  padding: 20px;
+  border: none; }
+
+.user-connections {
+  display: flex;
+  flex-wrap: wrap; }
+
+.delete-div {
+  display: flex;
+  align-content: center;
+  justify-content: center; }
+
+.friend {
+  margin: 10px; }
+
+.friend img {
+  height: 100px;
+  width: 100px; }
+
+.similar-users {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-wrap: wrap; }
 
 /*# sourceMappingURL=style.css.map */
