@@ -2,11 +2,12 @@
 <div class="user-profile">
   <div class="div1">
   <h2>{{user.username}}</h2>
-  <img src="../../uploads/{{user.id}}.jpg" alt="{{user.name}} pic"/>
+  <img src="{{user.image}}" alt="{{user.username}} pic" title="{{user.username}} pic"/>
   <p>{{#if user.city}}{{user.city}}, {{/if}}{{#if user.country}}{{user.country}}{{/if}}</p>
   <h4>Profile options</h4>
   <ul>
-    <li><a href="/user/update">Update profile</a></li>
+    <li><a href="/user/update">Update profile data</a></li>
+    <li><a href="/user/picture">Update profile picture</a></li>
     <li><a href="/user/delete">Delete your account</a></li>
   </ul>
   </div>

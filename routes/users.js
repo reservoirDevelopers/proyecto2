@@ -4,8 +4,35 @@ const User = require("../models/User");
 const secure = require("../middlewares/secure.mid");
 const recommendations = require("../controllers/recommendation.controller");
 const multer = require("multer");
-const upload = multer({ dest: "./public/uploads/" });
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const uploadCloud = require('../configs/cloudinary.config');
 let transporter = require("../configs/nodemailer.config");
+
+router.get("/user/picture", secure.checkIfLogged, (req, res, next) => {
+  const user = req.user;
+  res.render("users/picture", { user });
+  
+});
+
+router.post("/user/picture", secure.checkIfLogged, uploadCloud.single('photo'), (req, res, next) => {
+  const user = req.user;
+  const imgPath = req.file.url
+  console.log(req.file)
+
+  User.findOneAndUpdate({ _id: user },
+    {
+      $set: {
+        image: imgPath
+      }
+    }
+  ).then(picture  => {
+    res.redirect('/user/me');
+  })
+  .catch(error => {
+    console.log(error);
+  })
+});
 
 router.get("/user/me", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
@@ -26,7 +53,7 @@ router.get("/user/following", secure.checkIfLogged, (req, res, next) => {
 
 router.get(
   "/user/update",
-  upload.single("photo"),
+  uploadCloud.single("photo"),
   secure.checkIfLogged,
   (req, res, next) => {
     const loggedUser = req.user;
@@ -38,7 +65,7 @@ router.get(
 
 router.post(
   "/user/update",
-  upload.single("photo"),
+  uploadCloud.single("photo"),
   secure.checkIfLogged,
   (req, res, next) => {
     const { username, email, gender, city, country } = req.body;

@@ -6,7 +6,7 @@ const router = express.Router();
 const User = require("../models/User");
 
 const multer = require('multer');
-const upload = multer({ dest: './public/uploads/' });
+// const upload = multer({ dest: './public/uploads/' });
 
 let transporter = require("../configs/nodemailer.config");
 const ensureLogin = require("connect-ensure-login");
@@ -35,32 +35,37 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", upload.single('photo'), (req, res, next) => {
+router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  const email = req.body.email; 
-
+  const email = req.body.email;
+  console.log(username, password)
   const gender = (req.body.gender)?req.body.gender: "";
   const city = (req.body.city)?req.body.city: "";
   const country = (req.body.country)?req.body.country: "";
-  // const secure_url = (req.file && req.file.secure_url)?req.file.secure_url: ".images/userProfile/default.jpg";
 
   if (username === "" || password === "" || email === "") {
     res.render("auth/signup", { message: "Please, enter email, username and password" });
     return;
   }
 
+  console.log("step 1")
+
   User.findOne({ username }, "username", (err, user) => {
     if (user) {
       res.render("auth/signup", { message: "The username already exists" });
       return;
     }
+
+    console.log("step 2")
   
     User.findOne({ email }, "email", (err, user) => {
       if (user) {
         res.render("auth/signup", { message: "The email already exists" });
         return;
       }
+
+      console.log("step 3")
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
@@ -72,29 +77,58 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
      token += characters[Math.floor(Math.random() * characters.length)];
     }
 
-    const newUser = new User({
+    console.log("step 4", token)
+
+    // const newUser = new User({
+    //   email,
+    //   username,
+    //   password: hashPass,
+    //   gender,
+    //   city,
+    //   country,
+    //   status: "Pending confirmation",
+    //   confirmationCode: token,
+    //   friends: []
+    // });
+
+    console.log("step 5")
+
+    console.log({
       email,
       username,
       password: hashPass,
       gender,
       city,
       country,
-      // image: secure_url,
       status: "Pending confirmation",
       confirmationCode: token,
       friends: []
-    });
+    })
 
-    newUser.save()
+    User.create({
+      email,
+      username,
+      password: hashPass,
+      gender: 'prefer not to say',
+      city,
+      country,
+      status: "Pending confirmation",
+      confirmationCode: token,
+      friends: []
+    })
     .then(() => {
+      console.log("step 6")
       transporter
       .sendMail({
         from: "Reservoir Developers",
-        to: email,
+        to: "natgarea@gmail.com",
         subject: "Confirmation email",
         text: "Confirmation email",
         html: `<a href="/auth/confirm/${token}">Haz click para confirmar tu cuenta</a>`
-      }).then(() => res.redirect("/"))
+      }).then(() => {
+        console.log("step 7")
+        res.redirect("/user/picture")
+      })
     })
     .catch(err => {
       res.render("auth/signup", { message: "Something went wrong" });

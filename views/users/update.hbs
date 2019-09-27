@@ -1,6 +1,6 @@
 <h2>Update your data</h2>
 
-<form action="/user/update" method="POST" id="form-container" enctype="multipart/form-data">
+<form action="/user/update" method="POST" id="form-container">
   <label for="email">Email</label>
   <input id="email" type="email" name="email" value="{{user.email}}">
 
@@ -28,11 +28,6 @@
 
   <label for="country">Country</label>
   <input id="country" type="text" name="country" value="{{user.country}}">
-  
-  <br><br>
-
-  {{!-- <label for="photo">Profile picture</label>
-  <input type="file" name="your photo" value="your photo"> --}}
   
   <br><br>
 
