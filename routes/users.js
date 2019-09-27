@@ -53,7 +53,7 @@ router.get("/user/similar", secure.checkIfLogged, (req, res, next) => {
 router.get("/user/following", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
   User.findById(user).populate("friends").then(user => {
-    res.render("users/following", { friends: user.friends });
+    res.render("users/following", { friends: user.friends, user });
   });
 });
 
@@ -122,9 +122,10 @@ router.get("/users/deletion", secure.checkIfLogged, (req, res, next) => {
 
 router.get("/user/:id", secure.checkIfLogged, (req, res, next) => {
   const other = req.params.id;
+  const user = req.user;
 
   User.findOne({ _id: other }).then(other => {
-    res.render("users/user", { other });
+    res.render("users/user", { other, user });
   });
 });
 

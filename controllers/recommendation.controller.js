@@ -3,21 +3,17 @@ const Review = require("../models/Review");
 user = {};
 
 // Finds users with closest movie ratings
-controller.findNearestNeighbours = (res, next, cu) => {
+controller.findNearestNeighbours = (res, next, user) => {
   Review.find({}, "movie user score", function(err, docs) {}).then(
     reviewsOfAllUsers => {
   
-      function compareSimilarity(a, b) {
-        let score1 = similarityScores[a.user];
-        let score2 = similarityScores[b.user];
-        return score2 - score1;
-      }
+
   
       let similarityScores = [];
       let totalReviewsToVisit = 0;
       let totalReviewsVisited = 0;
   
-      let current = cu["_id"];
+      let current = user["_id"];
 
       for (let j = 0; j < reviewsOfAllUsers.length; j++) {
         let other = reviewsOfAllUsers[j]["user"];
@@ -49,9 +45,10 @@ controller.findNearestNeighbours = (res, next, cu) => {
                   if (a.similarity > b.similarity)  return -1
                 })
 
-                similarityScores = similarityScores.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{});
 
-              res.render("users/similar", { cu, similarityScores })
+                similarityScores = similarityScores.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{});
+              
+              res.render("users/similar", { user, similarityScores })
             }
             
           });
@@ -110,5 +107,6 @@ function removeDuplicates(originalArray, prop) {
   }
    return newArray;
 }
+
 
 module.exports = controller;

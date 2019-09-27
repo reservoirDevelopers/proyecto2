@@ -1,23 +1,16 @@
 <h1>Profile page</h1>
+
 <div class="user-profile">
-  <div class="div1">
-  <h2>{{user.username}}</h2>
-  <img src="{{user.image}}" alt="{{user.username}} pic" title="{{user.username}} pic"/>
-  <p>{{#if user.city}}{{user.city}}, {{/if}}{{#if user.country}}{{user.country}}{{/if}}</p>
-  <h4>Profile options</h4>
+  <div class="div1"><h2>{{user.username}}</h2>
+  <p>{{#if user.city}}{{user.city}}, {{/if}}{{#if user.country}}{{user.country}}{{/if}}</p></div>
+  <div class="div2"><img src="{{user.image}}" alt="{{user.username}} pic" title="{{user.username}} pic"/></div>
+  <div class="div3"><h4>Profile options</h4>
   <ul>
     <li><a href="/user/update">Update profile data</a></li>
     <li><a href="/user/picture">Update profile picture</a></li>
     <li><a href="/user/delete">Delete your account</a></li>
-  </ul>
-  </div>
-<div class="div2">
-    <h4>Connections and similar users</h4>
-  <ul>
-    <li><a href="/user/similar">Similar users</a></li>
-    <li><a href="/user/following">Following</a></li>
-  </ul>
+  </ul></div>
+  <div class="div4"><h4>Connections and similar users</h4></div>
+  <div class="div5"><a href="/user/similar">Similar users</a></div>
+  <div class="div6"><a href="/user/following">Following</a></div>
 </div>
-{{!-- <div class="div3">
-  <h4>Your statistics</h4>
-</div> --}}
