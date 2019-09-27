@@ -2,14 +2,13 @@
 <div class="user-profile">
   <div class="div1">
     <h2>{{other.username}}</h2>
-    <img src="{{other.image}}" alt="{{other.username}} image" />
+  <img src="../../uploads/{{other.id}}.jpg" alt="{{other.name}} pic"/>
     <p>{{#if other.city}}{{other.city}}, {{/if}}{{#if other.country}}{{other.country}}{{/if}}</p>
     <div class="div2">
       <form action="/user/{{other._id}}" method="POST">
         <button type="submit">Follow this user</button>
       </form>
     </div>
-    <div class="div3">
+    {{!-- <div class="div3">
       <h4>Statistics from user</h4>
-      {{!-- Statistics from user --}}
-    </div>
+    </div> --}}

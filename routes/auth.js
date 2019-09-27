@@ -94,7 +94,7 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
         subject: "Confirmation email",
         text: "Confirmation email",
         html: `<a href="/auth/confirm/${token}">Haz click para confirmar tu cuenta</a>`
-      }).then(() => res.redirect("/ratemovie"))
+      }).then(() => res.redirect("/"))
     })
     .catch(err => {
       res.render("auth/signup", { message: "Something went wrong" });

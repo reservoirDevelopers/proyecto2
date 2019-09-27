@@ -2,6 +2,7 @@
 <div class="user-profile">
   <div class="div1">
   <h2>{{user.username}}</h2>
+  <img src="../../uploads/{{user.id}}.jpg" alt="{{user.name}} pic"/>
   <p>{{#if user.city}}{{user.city}}, {{/if}}{{#if user.country}}{{user.country}}{{/if}}</p>
   <h4>Profile options</h4>
   <ul>
@@ -13,10 +14,9 @@
     <h4>Connections and similar users</h4>
   <ul>
     <li><a href="/user/similar">Similar users</a></li>
-    <li><a href="/user/connection">User connections</a></li>
+    <li><a href="/user/following">Following</a></li>
   </ul>
 </div>
-<div class="div3">
+{{!-- <div class="div3">
   <h4>Your statistics</h4>
-  {{!-- Statistics from user --}}
-</div>
+</div> --}}

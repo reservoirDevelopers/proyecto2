@@ -1,6 +1,10 @@
-  <h1>People you follow</h1>
+<h1>People you follow</h1> 
+
+<div class="user-profile">
+  
   <div class="user-connections">
   {{#each user.friends}}
-  <div class="friend"><a href="user/{{this._id}}">{{this.username}}</a></div>
+  <div class="friend"><a href="user/{{this._id}}">  <img src="../../uploads/{{user.id}}.jpg" alt="{{user.name}} pic"/></a></div>
   {{/each}}
   </div>
+</div>

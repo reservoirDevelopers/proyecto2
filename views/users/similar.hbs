@@ -1,6 +1,6 @@
   <h1>Similar users to you</h1>
-  <ol>
+  <div class="user-profile">
     {{#each similarityScores}}
-    <li>{{this.id}}</li>
+    <div><a href="/user/{{this.id}}"><img src="../../uploads/{{this.id}}.jpg" alt="{{user.name}} pic"/></a></div>
     {{/each}}
-  </ol>
+  </div>

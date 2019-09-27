@@ -19,17 +19,9 @@ router.get("/user/similar", secure.checkIfLogged, (req, res, next) => {
 
 router.get("/user/following", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
-  User.findById(user)
-  .then(
-    (user) => {
-      console.log(user.friends)
-      res.render("users/following", { user })}
+  User.findById(user).then(
+  (user) => {res.render("users/following", { user })}
   )
-  .catch(
-    (err) => next(err)
-  )
-  
-  
 })
 
 router.get("/user/update", upload.single('photo'), secure.checkIfLogged, (req, res, next) => {
@@ -91,16 +83,15 @@ router.get("/user/:id", secure.checkIfLogged, (req, res, next) => {
 })  
 
 router.post("/user/:id", secure.checkIfLogged, (req, res, next) => {
-  const user = req.user;
+  const user = req.user.id;
   const other = req.params.id;
-
+  
   User.findById(other).then(
     (otherObj) => {
-      console.log(otherObj)
       User.findOneAndUpdate({ _id: user},
         {
           $set: {
-            friends: otherObj,
+            friends: otherObj._id,
         }}, {new: true})
     }
   ).then(
@@ -110,8 +101,6 @@ router.post("/user/:id", secure.checkIfLogged, (req, res, next) => {
     console.log(err);
   });
 
-
-    
 })
 
 module.exports = router;
