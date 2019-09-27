@@ -10,31 +10,48 @@ const Review = require("../models/Review");
 const secure = require("../middlewares/secure.mid");
 
 router.get('/search', (req, res, next) => {
+  const user = req.user;
   moviesDB.getPopular()
     .then((response) => {
       const movie = response.data.results
-      res.render('movies/search', { movie })
+      res.render('movies/search', { movie, user })
     })
 })
 
 router.post('/result', (req, res, next) => {
   const query = req.body.search;
+  const user = req.user;
   moviesDB.getBySearch(query)
     .then((response) => {
       const movie = response.data.results
-      res.render('movies/result', { movie })
+      res.render('movies/result', { movie, user })
     })
 })
 
-router.get("/film", (req, res, next) => {
-  moviesDB.getById(550)
-    .then((data) => {
-      res.render('movies/movie', data)
+router.post('/cast', (req, res, next) => {
+  const query = req.body.searchCast;
+  const user = req.user;
+  moviesDB.getActor(query)
+    .then((response) => {
+      console.log(response)
+      const cast = response.data.results
+      console.log(cast)
+      res.render('movies/cast', { cast, user })
+    })
+})
+
+router.post('/search/user', (req, res, next) => {
+  const search = req.body.searchUser;
+  const user = req.user;
+  User.find({ username: search })
+    .then((userFound) => {
+      res.render('users/search', { userFound, user })
     })
 })
 
 router.get('/info/:id', (req, res, next) => {
   const id = req.params.id;
+  const user = req.user;
   moviesDB.getById(id)
     .then((response) => {
       const movie = response.data
@@ -47,11 +64,10 @@ router.get('/info/:id', (req, res, next) => {
               movieLocal.review.map((rew) => {
                 ((rew.user).toString() === (req.user._id).toString()) ? score = rew : 0
               });
-              console.log(score._id)
-              res.render('movies/info', { movie, score })
-            } else res.render('movies/info', { movie })
+              res.render('movies/info', { movie, score, user })
+            } else res.render('movies/info', { movie, user })
           }
-          else res.render('movies/info', { movie })
+          else res.render('movies/info', { movie, user })
         })
         .catch(err => {
           throw err
@@ -62,10 +78,32 @@ router.get('/info/:id', (req, res, next) => {
 
 router.post('/info/score/:scoreId', secure.checkIfLogged, (req, res, next) => {
   const rating = req.body.rating;
+  const user = req.user;
   Review.findByIdAndUpdate(req.params.scoreId, { score: rating }, { new: true })
-    .then(res.redirect('back'))
+    .then(res.redirect('back', { user }))
     .catch((err) => {
       throw err
+    })
+})
+
+router.get('/movies/:id', (req, res, next) => {
+  const user = req.user;
+  const id = req.params.id;
+  moviesDB.getActingMovies(id)
+    .then((response) => {
+      const movie = response.data.cast
+      console.log(movie)
+      res.render('movies/acting', { movie, user })
+    })
+})
+
+router.get('/cast/:id', (req, res, next) => {
+  const user = req.user;
+  const id = req.params.id;
+  moviesDB.getCast(id)
+    .then((response) => {
+      const cast = response.data.cast
+      res.render('movies/cast-movie', { cast, user })
     })
 })
 
@@ -90,7 +128,7 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
             { $push: { review: newReview._id } },
             { new: true }
           ).then(() => {
-            res.redirect('back');
+            res.redirect('back'), { user };
           })
         })
       } else {
@@ -116,7 +154,7 @@ router.post('/info/:id', secure.checkIfLogged, (req, res, next) => {
                   { $push: { review: newReview._id } },
                   { new: true }
                 ).then(() => {
-                  res.redirect('back');
+                  res.redirect('back'), { user };
                 })
               })
             })

@@ -1,6 +1,16 @@
 <div class="searchContainer flex-column">
 <form action="/result" method="POST">
   <input type="search" name="search" id="movie-search" placeholder="Search a movie">
-  <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <button type="submit">Go</button>
+</form>
+
+<form action="/cast" method="POST">
+  <input type="search" name="searchCast" id="cast-search" placeholder="Search cast">
+  <button type="submit">Go</button>
+</form>
+
+<form action="/search/user" method="POST">
+  <input type="search" name="searchUser" id="user-search" placeholder="Search a user">
+  <button type="submit">Go</button>
 </form>
 </div>

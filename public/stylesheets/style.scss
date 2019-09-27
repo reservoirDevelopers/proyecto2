@@ -27,6 +27,11 @@ h3 {
   color: #e6df44;
 }
 
+h3 a {
+  text-decoration: none;
+  color: #E6DF44
+}
+
 .movieCard img {
   width: 100vw;
   height: auto;
@@ -268,11 +273,24 @@ nav a {
 
 .searchContainer {
   justify-content: center;
-  height: 70vh;
+  height: 80vh;
 }
 
 .searchContainer input {
   color: #E6DF44;
+  font-weight: bold;
+}
+
+.searchContainer form {
+  margin: 30px 0;
+}
+
+.searchContainer button {
+  background-color: #E6DF44;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: #14213D;
   font-weight: bold;
 }
 
@@ -332,4 +350,14 @@ nav a {
 .friend img {
   height: 30px;
   width: 30px;
+}
+
+.userFound {
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 80vh;
+}
+
+.hidden {
+  display: none;
 }

@@ -1,16 +1,17 @@
 <h1>Reviews</h1>
 
 {{#each reviews}}
+{{#if comment}}
 <div class="reviewGrid">
-<div class="div1">User:</div>
-<div class="div2">{{username}}</div>
-<div class="div3">Rating: {{score}}</div>
-<div class="div4">Title:</div>
-<div class="div5">{{title}}</div>
-<div class="div6">{{comment}}</div>
+  <div class="div1">User:</div>
+  <div class="div2">{{username}}</div>
+  <div class="div3">Rating: {{score}}</div>
+  <div class="div4">Title:</div>
+  <div class="div5 checker2">{{title}}</div>
+  <div class="div6 checker">{{comment}}</div>
+{{/if}}
 </div>
 {{/each}}
-
 
  
 <form action="/writeReview/{{reviewUser._id}}" id="writeRvw" class="flex-column" method="post">

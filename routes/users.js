@@ -22,7 +22,6 @@ router.get("/user/following", secure.checkIfLogged, (req, res, next) => {
   User.findById(user)
   .then(
     (user) => {
-      console.log(user.friends)
       res.render("users/following", { user })}
   )
   .catch(
@@ -40,7 +39,6 @@ router.get("/user/update", upload.single('photo'), secure.checkIfLogged, (req, r
 })  
 
 router.post("/user/update", upload.single('photo'), secure.checkIfLogged, (req, res, next) => {
-  console.log(req.body.email)
   const { username, email, gender, city, country } = req.body;
   // const secure_url = (req.file && req.file.secure_url)?req.file.secure_url: false;
 
@@ -96,7 +94,6 @@ router.post("/user/:id", secure.checkIfLogged, (req, res, next) => {
 
   User.findById(other).then(
     (otherObj) => {
-      console.log(otherObj)
       User.findOneAndUpdate({ _id: user},
         {
           $set: {
