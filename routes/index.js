@@ -12,10 +12,12 @@ router.get('/', (req, res, next) => {
   moviesDB.getPopular()
     .then((response) => {
       const movie = response.data.results
+      const user = req.user
       moviesDB.getTopRated()
         .then((response) => {
           const topRated = response.data.results
-          res.render('index', { movie, topRated })
+          console.log(user)
+          res.render('index', { movie, topRated, user })
         })
     })
 })
