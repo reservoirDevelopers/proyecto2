@@ -132,8 +132,6 @@ router.post("/user/:id/follow", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
   const other = req.params.id;
 
-  console.log(user);
-  console.log(other);
 
   User.findByIdAndUpdate(
     user._id,
