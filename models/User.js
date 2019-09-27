@@ -22,7 +22,9 @@ const userSchema = new Schema({
     unique: true
   },
   image: String,
-  friends: { type: Array },
+  friends: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  ],
   GoogleID: { type: String }
 }, {
   timestamps: {

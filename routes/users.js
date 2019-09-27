@@ -4,35 +4,41 @@ const User = require("../models/User");
 const secure = require("../middlewares/secure.mid");
 const recommendations = require("../controllers/recommendation.controller");
 const multer = require("multer");
-const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
-const uploadCloud = require('../configs/cloudinary.config');
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+const uploadCloud = require("../configs/cloudinary.config");
 let transporter = require("../configs/nodemailer.config");
 
 router.get("/user/picture", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
   res.render("users/picture", { user });
-  
 });
 
-router.post("/user/picture", secure.checkIfLogged, uploadCloud.single('photo'), (req, res, next) => {
-  const user = req.user;
-  const imgPath = req.file.url
-  console.log(req.file)
+router.post(
+  "/user/picture",
+  secure.checkIfLogged,
+  uploadCloud.single("photo"),
+  (req, res, next) => {
+    const user = req.user;
+    const imgPath = req.file.url;
+    console.log(req.file);
 
-  User.findOneAndUpdate({ _id: user },
-    {
-      $set: {
-        image: imgPath
+    User.findOneAndUpdate(
+      { _id: user },
+      {
+        $set: {
+          image: imgPath
+        }
       }
-    }
-  ).then(picture  => {
-    res.redirect('/user/me');
-  })
-  .catch(error => {
-    console.log(error);
-  })
-});
+    )
+      .then(picture => {
+        res.redirect("/user/me");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+);
 
 router.get("/user/me", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
@@ -46,8 +52,8 @@ router.get("/user/similar", secure.checkIfLogged, (req, res, next) => {
 
 router.get("/user/following", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
-  User.findById(user).then(user => {
-    res.render("users/following", { user });
+  User.findById(user).populate("friends").then(user => {
+    res.render("users/following", { friends: user.friends });
   });
 });
 
@@ -122,22 +128,21 @@ router.get("/user/:id", secure.checkIfLogged, (req, res, next) => {
   });
 });
 
-router.post("/user/:id", secure.checkIfLogged, (req, res, next) => {
+router.post("/user/:id/follow", secure.checkIfLogged, (req, res, next) => {
   const user = req.user;
   const other = req.params.id;
 
-  User.findById(other)
-    .then(otherObj => {
-      User.findOneAndUpdate(
-        { _id: user._id },
-        {
-          $set: {
-            friends: otherObj._id
-          }
-        },
-        { new: true }
-      );
-    })
+  console.log(user);
+  console.log(other);
+
+  User.findByIdAndUpdate(
+    user._id,
+    {
+      $push: {
+        friends: other
+      }
+    }
+  )
     .then(res.redirect("/user/following"))
     .catch(err => {
       console.log(err);
