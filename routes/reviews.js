@@ -10,7 +10,8 @@ const secure = require("../middlewares/secure.mid");
 
 
 router.get('/reviews/:id', (req, res, next) => {
-  const id = req.params.id
+  const id = req.params.id;
+  const user = req.user;
   Movie.findOne({ APIid: id })
     .populate('review')
     .then((movie) => {
@@ -19,19 +20,15 @@ router.get('/reviews/:id', (req, res, next) => {
       reviews.map((rew) => {
         ((rew.user).toString() === (req.user._id).toString()) ? reviewUser = rew : 0
       });
-      console.log('=======HEEEEY======', reviewUser)
-      console.log('=======Hola=====',reviews)
-      res.render('reviews/reviews', { reviews, reviewUser, movie })
+      res.render('reviews/reviews', { reviews, reviewUser, movie, user })
     })
 })
 
 router.post('/writeReview/:id', (req, res, next) => {
   const id = req.params.id;
   const { comment, title } = req.body;
-  console.log('=======Hola=====', id)
   Review.findByIdAndUpdate(id, { comment: comment, title: title, username: req.user.username }, { new: true })
     .then(() => {
-      console.log('Review updated')
       res.redirect('back')
     })
 })

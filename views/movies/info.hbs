@@ -4,7 +4,7 @@
   </div>
 
 <div class="parent">
-  <div class="div1"><h3>{{movie.title}}</h3></div>
+  <div class="div1"><h3><a href="/cast/{{movie.id}}">{{movie.title}}</a></h3></div>
   <div class="div2"><p>Year:</p></div>
   <div class="div3"><p class="date">{{movie.release_date}}</p></div>
   <div class="div4"><img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{movie.backdrop_path}}" alt=""></div>
@@ -60,6 +60,9 @@
 </div>
 {{/if}}
 
+<div class="flex">
+  <h5><a href="/cast/{{movie.id}}">Go to Cast</a></h5>
+</div>
 
 <div class="reviews flex">
   <form action="/reviews/{{movie.id}}" method="GET" name="reviews">

@@ -1,0 +1,8 @@
+<div class="flex movieResults">
+{{#each movie}}
+  <div class="movieResult flex-column">
+    <h3>{{title}}</h3>
+    <a class="carousel-item" href="/info/{{id}}"><img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{this.poster_path}}"></a>
+  </div>
+{{/each}}
+</div>

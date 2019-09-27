@@ -16,7 +16,6 @@ router.get('/', (req, res, next) => {
       moviesDB.getTopRated()
         .then((response) => {
           const topRated = response.data.results
-          console.log(user)
           res.render('index', { movie, topRated, user })
         })
     })
