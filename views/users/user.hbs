@@ -1,8 +1,15 @@
-{{#if image}}
-<img src="{{image}}" alt="{{username}} image"/>
-{{else}}
-<img src="https://media.giphy.com/media/3o7rc0qU6m5hneMsuc/giphy.gif" alt="{{user.username}} image"/>
-{{/if}}
-<h2>{{username}}</h2>
-<button>Connect with this user</button>
-{{!-- Statistics from user --}}
+<h1>User page</h1>
+<div class="user-profile">
+  <div class="div1">
+    <h2>{{other.username}}</h2>
+    <img src="{{other.image}}" alt="{{other.username}} image" />
+    <p>{{#if other.city}}{{other.city}}, {{/if}}{{#if other.country}}{{other.country}}{{/if}}</p>
+    <div class="div2">
+      <form action="/user/{{other._id}}" method="POST">
+        <button type="submit">Follow this user</button>
+      </form>
+    </div>
+    <div class="div3">
+      <h4>Statistics from user</h4>
+      {{!-- Statistics from user --}}
+    </div>

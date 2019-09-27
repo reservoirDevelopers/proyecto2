@@ -10,6 +10,9 @@ const upload = multer({ dest: './public/uploads/' });
 
 let transporter = require("../configs/nodemailer.config");
 const ensureLogin = require("connect-ensure-login");
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const uploadCloud = require('../configs/cloudinary.config');
 
 
 
@@ -37,10 +40,10 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
   const password = req.body.password;
   const email = req.body.email; 
 
-  const gender = (req.body.gender)?req.body.gender: false;
-  const city = (req.body.city)?req.body.city: false;
-  const country = (req.body.country)?req.body.country: false;
-  const { filename } = (req.file)?req.file: false;
+  const gender = (req.body.gender)?req.body.gender: "";
+  const city = (req.body.city)?req.body.city: "";
+  const country = (req.body.country)?req.body.country: "";
+  // const secure_url = (req.file && req.file.secure_url)?req.file.secure_url: ".images/userProfile/default.jpg";
 
   if (username === "" || password === "" || email === "") {
     res.render("auth/signup", { message: "Please, enter email, username and password" });
@@ -76,7 +79,7 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
       gender,
       city,
       country,
-      image: `/uploads/${filename}`,
+      // image: secure_url,
       status: "Pending confirmation",
       confirmationCode: token,
       friends: []
@@ -90,7 +93,7 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
         to: email,
         subject: "Confirmation email",
         text: "Confirmation email",
-        html: `<a href="http://localhost:3000/auth/confirm/${token}">Haz click para confirmar tu cuenta</a>`
+        html: `<a href="/auth/confirm/${token}">Haz click para confirmar tu cuenta</a>`
       }).then(() => res.redirect("/ratemovie"))
     })
     .catch(err => {
@@ -99,24 +102,6 @@ router.post("/signup", upload.single('photo'), (req, res, next) => {
   });
 });
 });
-
-router.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email"
-    ]
-  })
-);
-
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/user/me",
-    failureRedirect: "/auth/login" 
-  })
-);
 
 router.get("/confirm/:token", (req, res, next) => {
   const token = req.params.token;
@@ -135,5 +120,23 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/user/me",
+    failureRedirect: "/auth/login" 
+  })
+);
 
 module.exports = router;

@@ -19,7 +19,6 @@ const userSchema = new Schema({
   },
   confirmationCode: {
     type: String,
-    required: true,
     unique: true
   },
   image: String,
